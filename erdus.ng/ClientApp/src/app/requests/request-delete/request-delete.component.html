@@ -1,0 +1,10 @@
+<h2 class="text-center"> Czy chcesz usunąć zgłoszenie?</h2>
+<div class="row">
+  <div class="mx-auto">
+      <button [disabled]="disableSubmitButton" class="btn btn-danger" type="submit" (click)="submit()"> Usuń </button>
+      &nbsp;
+      <button class="btn btn-secondary" [routerLink]="['/requests']">Anuluj</button>
+  </div>
+ 
+</div>
+

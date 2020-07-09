@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+a { cursor: pointer }
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  padding-bottom: 6rem;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 50px; /* Set same as footer's height */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.snack-bar-alert {
+  background-color: #e84b4b !important;
+}
+
+.snack-bar-success {
+  background-color: #28a745 !important;
+}
+
+.footer {
+  position: relative;
+  right: 0;
+  bottom: -51px;
+  left: 0;
+  padding: 1rem;
+  background-color: white;
+  text-align: center;
+  border-top: 1px solid #6f7173;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .content-desktop {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .content-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (width: 768px) {
+  .content-mobile {
+    display: none !important;
+  }
+}

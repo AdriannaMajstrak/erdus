@@ -1,0 +1,67 @@
+<h1>Zgłoszenia mi przypisane i nowe</h1>
+
+<div class="d-flex justify-content-center" *ngIf='!requestsList'>
+  <div class="spinner-border text-center"></div>
+</div>
+
+<div class='table-responsive content-desktop'>
+  <table [dtOptions]="dtOptionsDeskop" datatable class="row-border hover" *ngIf='requestsList'>
+    <thead>
+      <tr>
+        <th>Temat</th>
+        <th>Adres</th>
+        <th>Data utworzenia</th>
+        <th>Kategoria</th>
+        <th>Status zgłoszenia</th>
+        <th>Osoba odpowiedzialna</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let request of requestsList'>
+        <td>
+          {{ request.topic }}
+        </td>
+        <td>{{ request.address }}</td>
+        <td>{{ request.creationDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{ request.categoryName}}</td>
+        <td>{{ request.status}}</td>
+        <td>{{ request.responsiblePerson}}</td>
+        <td>
+          <a [routerLink]="['/requests', request.id]">
+            Szczegóły
+          </a>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class='table-responsive content-mobile'>
+  <table [dtOptions]="dtOptionsMobile" datatable class="row-border hover" *ngIf='requestsList'>
+    <thead>
+      <tr>
+        <th>Temat</th>
+        <th>Kategoria</th>
+        <th>Przypisany</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let request of requestsList'>
+        <td>
+          <a [routerLink]="['/requests', request.id]">
+            {{ request.topic }}
+          </a>
+        </td>
+        <td>{{ request.categoryName}}</td>
+        <td>{{ request.hasResponsiblePerson ? 'TAK' : 'NIE'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+

@@ -1,0 +1,9 @@
+﻿Witaj {0}
+
+W Twoim zgłoszeniu {1} na portalu Zgłoś usterkę w Twoim mieście zmienił się status lub odpowiedź osoby odpowiedzialnej.
+Aktualny status to: {2}.
+Treść  aktualnego komentarza: 
+{3}
+
+Pozdrawiamy
+Zespół Edrus.pl

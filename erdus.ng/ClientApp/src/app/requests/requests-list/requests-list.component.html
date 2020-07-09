@@ -1,0 +1,36 @@
+<h1>Lista zgłoszeń</h1>
+
+<div class="d-flex justify-content-center" *ngIf='!requestsList'>
+  <div class="spinner-border text-center"></div>
+</div>
+
+<div class='table-responsive'>
+  <table datatable  [dtOptions]="dtOptions" class="row-border hover"*ngIf='requestsList'>
+    <thead>
+      <tr>
+        <th>Temat</th>
+        <th class="content-desktop">Adres</th>
+        <th>Data utworzenia</th>
+        <th class="content-desktop">Katgoria</th>
+        <th class="content-desktop">Status zgłoszenia</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let request of requestsList'>
+        <td>{{ request.topic }}</td>
+        <td class="content-desktop">{{ request.address }}</td>
+        <td>{{ request.creationDate | date:'yyyy-MM-dd'}}</td>
+        <td class="content-desktop">{{ request.categoryName}}</td>
+        <td class="content-desktop">{{ request.status}}</td>
+        <td>
+          <a [routerLink]="['/requests', request.id]">
+            Szczegóły
+          </a>
+        </td>
+      </tr>
+    </tbody>  
+  </table>
+</div>
+
+

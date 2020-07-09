@@ -1,0 +1,46 @@
+<h1>Edytuj zgłoszenie</h1>
+<h2 *ngIf='request'>{{ request.topic }}</h2>
+<h5 *ngIf='request'> Data utworzenia: {{ request.creationDate  | date:'yyyy-MM-dd' }}</h5>
+  
+  <div class="row">
+    <div class="col-md-4"  *ngIf='request'>
+      <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+        <div class="form-group col">
+          <label>Kategoria</label>
+          <select class="form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && requestF.category.errors }">
+            <option *ngFor="let category of categories" [value]="category.id">{{category.value}}</option>
+          </select>
+          <div *ngIf="submitted && requestF.category.errors" class="invalid-feedback">
+            <div *ngIf="requestF.category.errors.required">podaj wartość</div>
+          </div>
+
+          <label>Zdjęcie</label>
+          <input class="form-control" type="file" (change)="fileProgress($event)" formControlName="file" />
+
+          <label>Lokalizacja</label>
+          <input class="form-control" type="text" formControlName="location" readonly="readonly" [ngClass]="{ 'is-invalid': submitted && requestF.location.errors }" />
+          <div *ngIf="submitted && requestF.location.errors" class="invalid-feedback">
+            <div *ngIf="requestF.location.errors.required">dodaj lokalizacje</div>
+          </div>
+          <label>Adres</label>
+          <input class="form-control" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && requestF.address.errors }" />
+          <div *ngIf="submitted && requestF.address.errors" class="invalid-feedback">
+            <div *ngIf="requestF.address.errors.required">dodaj adres</div>
+          </div>
+          <label>Opis </label>
+          <textarea rows="5" maxlength="500" class="form-control" type="text" formControlName="content" [ngClass]="{ 'is-invalid': submitted && requestF.content.errors }"></textarea>
+          <div *ngIf="submitted && requestF.content.errors" class="invalid-feedback">
+            <div *ngIf="requestF.content.errors.required">dodaj opis</div>
+          </div>
+          <p></p>
+          <button class="btn btn-primary" [disabled]="disableSubmitButton">Zapisz</button>
+          &nbsp;
+          <button class="btn btn-secondary" [routerLink]="['/requests/', request.id]">Anuluj</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <app-map-component (mapInitialized)="mapInitialized()" [selectEnabled]="true" [coordinatesList]="coordinatesList" (newCoorinatesSelected)="newCoorinatesSelected($event)"></app-map-component>
+    </div>
+  </div>
+

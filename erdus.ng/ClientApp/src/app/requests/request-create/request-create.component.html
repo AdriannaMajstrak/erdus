@@ -1,0 +1,50 @@
+<h1>Zgłoś usterkę</h1>
+
+<h4>Utwórz nowe zgłoszenie</h4>
+<hr />
+<div class="row">
+  <div class="col-md-4">
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()" >
+      <div class="form-group col">
+        <label>Temat</label>
+        <input class="form-control" type="text" formControlName="topic" [ngClass]="{ 'is-invalid': submitted && requestF.topic.errors }" />
+        <div *ngIf="submitted && requestF.topic.errors" class="invalid-feedback">
+          <div *ngIf="requestF.topic.errors.required">podaj wartość</div>
+        </div>
+        <label>Kategoria</label>
+        <select class="form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && requestF.category.errors }" >
+          <option *ngFor="let category of categories" [value]="category.id">{{category.value}}</option>
+        </select>
+        <div *ngIf="submitted && requestF.category.errors" class="invalid-feedback">
+          <div *ngIf="requestF.category.errors.required">podaj wartość</div>
+        </div>
+        <label>Zdjęcie</label>
+        <input class="form-control" type="file" (change)="fileProgress($event)" formControlName="file" [ngClass]="{ 'is-invalid': submitted && requestF.file.errors }" />
+        <div *ngIf="submitted && requestF.file.errors" class="invalid-feedback">
+          <div *ngIf="requestF.file.errors.required">dodaj zdjęcie</div>
+        </div>
+        <label>Lokalizacja</label>
+        <input class="form-control" type="text" formControlName="location" readonly="readonly" [ngClass]="{ 'is-invalid': submitted && requestF.location.errors }" />
+        <div *ngIf="submitted && requestF.location.errors" class="invalid-feedback">
+          <div *ngIf="requestF.location.errors.required">dodaj lokalizacje</div>
+        </div>
+        <label>Adres</label>
+        <input class="form-control" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && requestF.address.errors }" />
+        <div *ngIf="submitted && requestF.address.errors" class="invalid-feedback">
+          <div *ngIf="requestF.address.errors.required">dodaj adres</div>
+        </div>
+        <label>Opis </label>
+        <textarea rows="5" maxlength="500" class="form-control" type="text" formControlName="content" [ngClass]="{ 'is-invalid': submitted && requestF.content.errors }"></textarea>
+        <div *ngIf="submitted && requestF.content.errors" class="invalid-feedback">
+          <div *ngIf="requestF.content.errors.required">dodaj opis</div>
+        </div>
+        <p></p>
+        <button class="btn btn-primary" [disabled]="disableSubmitButton">Zapisz</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-8">
+    <app-map-component [selectEnabled]="true" [coordinatesList]="" (newCoorinatesSelected)="newCoorinatesSelected($event)"></app-map-component>
+  </div>
+</div>
+

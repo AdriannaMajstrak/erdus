@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center" *ngIf='!request'>
+  <div class="spinner-border text-center"></div>
+</div>
+
+<h1 *ngIf='request' >{{ request.topic }}</h1>
+
+<div *ngIf='request'>
+  <h4>Szczegóły</h4>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <dl class="row">
+        <dt class="col-sm-4">
+          Data utworzenia
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.creationDate  | date:'yyyy-MM-dd' }}
+        </dd>
+        <dt class="col-sm-4">
+          Kategoria
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.categoryName }}
+        </dd>
+        <dt class="col-sm-4">
+          Lokalizacja
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.location }}
+        </dd>
+        <dt class="col-sm-4">
+          Adres
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.address }}
+        </dd>
+        <dt class="col-sm-4">
+          Zgłaszający
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.requester }}
+        </dd>
+        <dt class="col-sm-4">
+          Osoba odpowiedzialna
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.responsiblePersonName }}
+        </dd>
+        <dt class="col-sm-4">
+          Status
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.statusName }}
+        </dd>
+        <dt class="col-sm-4">
+          Opis
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.content}}
+        </dd>
+        <dt class="col-sm-4">
+          Odpowiedź
+        </dt>
+        <dd class="col-sm-8">
+          {{ request.answer}}
+        </dd>
+
+      </dl>
+    </div>
+    <div class="col-md-6">
+      <div class="img"><img [src]=[request.photo] class="img-thumbnail"></div>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dostępne akcje
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#" [routerLink]="['/requests']">Wróć do listy</a>
+      <a class="dropdown-item" href="#" *ngIf="canEdit()" [routerLink]="['/requests/edit', request.id]">
+        Edytuj
+      </a>
+      <a class="dropdown-item" href="#" *ngIf="request.userPermissions.canChangeStatus" [routerLink]="['/requests/status/edit', request.id]">
+        Edytuj status
+      </a>
+      <a class="dropdown-item" href="#" *ngIf="request.userPermissions.canChangeResponsiblePerson" [routerLink]="['/requests/responsibility/edit', request.id]">
+        Zmień osobę odpowiedzialną
+      </a>
+      <a class="dropdown-item" href="#" *ngIf="request.userPermissions.canDelete" [routerLink]="['/requests/delete', request.id]">
+        Usuń zgłoszenie
+      </a>
+    </div>
+  </div>
+  <!--<a [routerLink]="['/requests']">
+    Wróć do listy
+  </a>
+  <a *ngIf="canEdit()" [routerLink]="['/requests/edit', request.id]">
+    | Edytuj
+  </a>-->
+  <!--<a *ngIf="request.userPermissions.canChangeStatus" [routerLink]="['/requests/status/edit', request.id]">
+    | Edytuj status
+  </a>
+  <a *ngIf="request.userPermissions.canChangeResponsiblePerson" [routerLink]="['/requests/responsibility/edit', request.id]">
+    | Zmień osobę odpowiedzialną
+  </a>
+  <a *ngIf="request.userPermissions.canDelete" [routerLink]="['/requests/delete', request.id]">
+    | Usuń zgłoszenie
+  </a>-->
+  <p></p>
+  <div class="col-md-12">
+  </div>
+</div>
+
+<app-map-component  (mapInitialized)="mapInitialized()" [selectEnabled]="false" [coordinatesList]="coordinatesList"></app-map-component>
